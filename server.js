@@ -118,13 +118,18 @@ app.post("/login", async (req, res) => {
     res.status(200).json({
       message: "Login successful",
       token,
-      redirectTo: "/home",
+      user: {
+        id: user._id,
+        firstName: user.firstName,
+        email: user.email,
+      },
     });
   } catch (err) {
     console.error("Error during login:", err);
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error during login" });
   }
 });
+
 
 // --- Forgot Password API ---
 app.post("/forgot-password", async (req, res) => {
@@ -226,5 +231,7 @@ app.get("/home", verifyToken, (req, res) => {
 });
 
 // --- Start Server ---
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
+module.exports = app;
