@@ -171,6 +171,10 @@ app.post("/forgot-password", async (req, res) => {
   }
 });
 
+app.use('/', (req,res)=>{
+  res.send("Backend woring");
+})
+
 // --- Reset Password API ---
 app.post("/reset-password/:token", async (req, res) => {
   const { token } = req.params;
